@@ -1,0 +1,203 @@
+<div class="contenedor">
+
+  <!-- HEADER -->
+  <div class="header">
+
+    <h2>
+      <img src="/loghue.jpg" class="titulo-icono">
+      Lista de Huéspedes
+    </h2>
+
+    <button
+      class="btn-agregar"
+      (click)="agregar()"
+      title="Agregar huésped"
+    >
+      <i class="fas fa-plus"></i>
+    </button>
+
+  </div>
+
+  <!-- FORMULARIO -->
+  @if (mostrarFormulario) {
+
+    <div class="form-card">
+
+      <h3>
+
+        <img src="/logregi.jpg" class="form-icono">
+
+        {{ modoEdicion ? 'Editar huésped' : 'Nuevo huésped' }}
+
+      </h3>
+
+      <div class="form-grid">
+
+        <!-- NOMBRE -->
+        <input
+          type="text"
+          [(ngModel)]="huespedForm.nombre"
+          name="nombre"
+          placeholder="Nombre"
+        >
+
+        <!-- APELLIDO -->
+        <input
+          type="text"
+          [(ngModel)]="huespedForm.apellido"
+          name="apellido"
+          placeholder="Apellido"
+        >
+
+        <!-- DNI -->
+        <input
+          type="text"
+          [(ngModel)]="huespedForm.dni"
+          name="dni"
+          placeholder="DNI"
+        >
+
+        <!-- PROCEDENCIA -->
+        <input
+          type="text"
+          [(ngModel)]="huespedForm.procedencia"
+          name="procedencia"
+          placeholder="Procedencia"
+        >
+
+        <!-- PAÍS -->
+        <input
+          type="text"
+          [(ngModel)]="huespedForm.pais"
+          name="pais"
+          placeholder="País"
+        >
+
+        <!-- PROFESIÓN -->
+        <input
+          type="text"
+          [(ngModel)]="huespedForm.profesion"
+          name="profesion"
+          placeholder="Profesión"
+        >
+
+        <!-- TELÉFONO -->
+        <input
+          type="text"
+          [(ngModel)]="huespedForm.telefono"
+          name="telefono"
+          placeholder="Teléfono"
+        >
+
+      </div>
+
+      <!-- BOTONES -->
+      <div class="form-actions">
+
+        <button
+          class="btn-guardar"
+          (click)="guardar()"
+          title="Guardar"
+        >
+          <i class="fas fa-save"></i>
+        </button>
+
+        <button
+          class="btn-cancelar"
+          (click)="cancelar()"
+          title="Cancelar"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+  }
+
+  <!-- TABLA -->
+  <div class="tabla-card">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>ID</th>
+
+          <th>Nombre</th>
+
+          <th>Apellido</th>
+
+          <th>DNI</th>
+
+          <th>Procedencia</th>
+
+          <th>País</th>
+
+          <th>Profesión</th>
+
+          <th>Teléfono</th>
+
+          <th>Acciones</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for (h of huespedes; track h.id) {
+
+          <tr>
+
+            <td>{{ h.id }}</td>
+
+            <td>{{ h.nombre }}</td>
+
+            <td>{{ h.apellido }}</td>
+
+            <td>{{ h.dni }}</td>
+
+            <td>{{ h.procedencia }}</td>
+
+            <td>{{ h.pais }}</td>
+
+            <td>{{ h.profesion }}</td>
+
+            <td>{{ h.telefono }}</td>
+
+            <!-- BOTONES -->
+            <td class="acciones">
+
+              <button
+                class="btn editar"
+                (click)="editar(h)"
+                title="Editar"
+              >
+                <i class="fas fa-pen"></i>
+              </button>
+
+              <button
+                class="btn eliminar"
+                (click)="eliminar(h.id!)"
+                title="Eliminar"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+
+            </td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

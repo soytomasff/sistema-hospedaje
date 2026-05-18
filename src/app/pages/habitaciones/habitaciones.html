@@ -1,0 +1,185 @@
+<div class="contenedor">
+
+  <!-- HEADER -->
+  <div class="header">
+
+    <h2>
+      <img src="/login.jpg" class="titulo-icono">
+      Habitaciones
+    </h2>
+
+    <button
+      class="btn-agregar"
+      (click)="agregar()"
+      title="Agregar habitación"
+    >
+      <i class="fas fa-plus"></i>
+    </button>
+
+  </div>
+
+  <!-- FORMULARIO -->
+  @if (mostrarFormulario) {
+
+    <div class="form-card">
+
+      <h3>
+        <img src="/loghabi.jpg" class="form-icono">
+
+        {{ modoEdicion
+          ? 'Editar habitación'
+          : 'Nueva habitación'
+        }}
+      </h3>
+
+      <div class="form-grid">
+
+        <!-- CODIGO -->
+        <input
+          [(ngModel)]="habitacionForm.codigo"
+          name="codigo"
+          placeholder="Código"
+        >
+
+        <!-- NUMERO -->
+        <input
+          [(ngModel)]="habitacionForm.numero"
+          name="numero"
+          placeholder="Número"
+        >
+
+        <!-- TIPO -->
+        <input
+          [(ngModel)]="habitacionForm.tipo"
+          name="tipo"
+          placeholder="Tipo"
+        >
+
+        <!-- CAPACIDAD -->
+        <input
+          type="number"
+          [(ngModel)]="habitacionForm.capacidad"
+          name="capacidad"
+          placeholder="Capacidad"
+        >
+
+        <!-- PRECIO -->
+        <input
+          type="number"
+          [(ngModel)]="habitacionForm.precio"
+          name="precio"
+          placeholder="Precio"
+        >
+
+        <!-- ESTADO -->
+        <input
+          [(ngModel)]="habitacionForm.estado"
+          name="estado"
+          placeholder="Estado"
+        >
+
+      </div>
+
+      <!-- BOTONES -->
+      <div class="form-actions">
+
+        <button
+          class="btn-guardar"
+          (click)="guardar()"
+        >
+          <i class="fas fa-save"></i>
+        </button>
+
+        <button
+          class="btn-cancelar"
+          (click)="cancelar()"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+  }
+
+  <!-- TABLA -->
+  <div class="tabla-card">
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>ID</th>
+          <th>Código</th>
+          <th>Número</th>
+          <th>Tipo</th>
+          <th>Capacidad</th>
+          <th>Precio</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for (h of habitaciones; track h.id) {
+
+          <tr>
+
+            <td>{{ h.id }}</td>
+
+            <td>{{ h.codigo }}</td>
+
+            <td>{{ h.numero }}</td>
+
+            <td>{{ h.tipo }}</td>
+
+            <td>{{ h.capacidad }}</td>
+
+            <td>S/ {{ h.precio }}</td>
+
+            <td>
+
+              <span class="estado">
+
+                {{ h.estado }}
+
+              </span>
+
+            </td>
+
+            <!-- BOTONES -->
+            <td class="acciones">
+
+              <button
+                class="btn editar"
+                (click)="editar(h)"
+                title="Editar"
+              >
+                <i class="fas fa-pen"></i>
+              </button>
+
+              <button
+                class="btn eliminar"
+                (click)="eliminar(h.id!)"
+                title="Eliminar"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+
+            </td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

@@ -1,0 +1,148 @@
+<h2>Inventario de Productos</h2>
+
+<form (ngSubmit)="guardarProducto()" class="formulario">
+
+  <input
+    type="text"
+    placeholder="Código"
+    [(ngModel)]="producto.codigo"
+    name="codigo"
+    required
+  >
+
+  <input
+    type="text"
+    placeholder="Nombre"
+    [(ngModel)]="producto.nombre"
+    name="nombre"
+    required
+  >
+
+  <input
+    type="text"
+    placeholder="Categoría"
+    [(ngModel)]="producto.categoria"
+    name="categoria"
+    required
+  >
+
+  <input
+    type="number"
+    placeholder="Stock"
+    [(ngModel)]="producto.stock"
+    name="stock"
+    required
+  >
+
+  <input
+    type="number"
+    placeholder="Precio"
+    [(ngModel)]="producto.precio"
+    name="precio"
+    required
+  >
+
+  <input
+    type="text"
+    placeholder="Estado"
+    [(ngModel)]="producto.estado"
+    name="estado"
+  >
+
+  <input
+    type="text"
+    placeholder="Ubicación"
+    [(ngModel)]="producto.ubicacion"
+    name="ubicacion"
+  >
+
+  <div class="botones-formulario">
+
+    <button type="submit" class="btn-guardar">
+      {{ editando ? 'Actualizar producto' : 'Agregar producto' }}
+    </button>
+
+    @if (editando) {
+      <button
+        type="button"
+        class="btn-cancelar"
+        (click)="limpiarFormulario()"
+      >
+        Cancelar
+      </button>
+    }
+
+  </div>
+
+</form>
+
+@if (cargando) {
+
+  <p>Cargando productos...</p>
+
+} @else {
+
+  <p>Total productos: {{ productos.length }}</p>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Stock</th>
+        <th>Precio</th>
+        <th>Estado</th>
+        <th>Ubicación</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      @for (producto of productos; track producto.id) {
+
+        <tr>
+
+          <td>{{ producto.id }}</td>
+          <td>{{ producto.codigo }}</td>
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.categoria }}</td>
+          <td>{{ producto.stock }}</td>
+          <td>S/ {{ producto.precio }}</td>
+          <td>{{ producto.estado }}</td>
+          <td>{{ producto.ubicacion }}</td>
+
+          <td class="acciones">
+
+            <button
+              type="button"
+              class="btn editar"
+              (click)="editarProducto(producto)"
+              title="Editar"
+            >
+              <i class="fas fa-pen"></i>
+            </button>
+
+            <button
+              type="button"
+              class="btn eliminar"
+              (click)="eliminarProducto(producto.id!)"
+              title="Eliminar"
+            >
+              <i class="fas fa-trash"></i>
+            </button>
+
+          </td>
+
+        </tr>
+
+      }
+
+    </tbody>
+
+  </table>
+
+}

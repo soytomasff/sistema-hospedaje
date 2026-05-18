@@ -1,0 +1,53 @@
+.formulario {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+input {
+  padding: 8px;
+}
+
+button {
+  padding: 8px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th {
+  background: #1f2937;
+  color: white;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+
+.acciones {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn {
+  width: 40px;
+  height: 35px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+}
+
+.btn.editar {
+  background: #3b82f6;
+}
+
+.btn.eliminar {
+  background: #ef4444;
+}

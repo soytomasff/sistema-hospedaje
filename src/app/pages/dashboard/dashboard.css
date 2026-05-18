@@ -1,0 +1,150 @@
+.dashboard-container {
+
+  min-height: 100vh;
+
+  padding: 35px;
+
+  font-family: Arial, sans-serif;
+
+  background:
+    linear-gradient(
+      rgba(0,0,0,0.45),
+      rgba(0,0,0,0.45)
+    ),
+    url('/fondodash.jpg');
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  background-attachment: fixed;
+}
+
+/* HEADER */
+.dashboard-header {
+
+  margin-bottom: 35px;
+}
+
+/* TITULO */
+.dashboard-header h2 {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  font-size: 42px;
+
+  color: white;
+
+  text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
+}
+
+/* ICONO TITULO */
+.titulo-icono {
+
+  width: 55px;
+
+  height: 55px;
+
+  border-radius: 12px;
+
+  object-fit: cover;
+
+  background: white;
+
+  padding: 5px;
+}
+
+/* SUBTITULO */
+.subtitulo {
+
+  color: white;
+
+  font-size: 18px;
+
+  margin-top: 10px;
+
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+}
+
+/* CARDS */
+.cards {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(250px, 1fr));
+
+  gap: 25px;
+}
+
+/* CARD */
+.card {
+
+  background: rgba(255,255,255,0.88);
+
+  backdrop-filter: blur(8px);
+
+  padding: 30px;
+
+  border-radius: 22px;
+
+  text-align: center;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+  transition: 0.3s;
+}
+
+/* HOVER */
+.card:hover {
+
+  transform: translateY(-6px) scale(1.02);
+
+  box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+}
+
+/* ICONOS */
+.card-icon {
+
+  font-size: 55px;
+
+  margin-bottom: 15px;
+}
+
+/* TITULOS */
+.card h3 {
+
+  margin-bottom: 15px;
+
+  font-size: 24px;
+
+  color: #111827;
+}
+
+/* NUMEROS */
+.card p {
+
+  font-size: 42px;
+
+  font-weight: bold;
+
+  color: #2563eb;
+}
+
+/* LIBRES */
+.libre p {
+
+  color: #16a34a;
+}
+
+/* OCUPADAS */
+.ocupada p {
+
+  color: #dc2626;
+}

@@ -1,0 +1,90 @@
+<div class="dashboard-container">
+
+  <!-- TITULO -->
+  <div class="dashboard-header">
+
+    <h2>
+
+      <img src="/fondodash.jpg" class="titulo-icono">
+
+      Sistema de Hospedaje
+
+    </h2>
+
+    <p class="subtitulo">
+      Panel principal del sistema
+    </p>
+
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards">
+
+    <!-- HUESPEDES -->
+    <div class="card">
+
+      <div class="card-icon">
+        👤
+      </div>
+
+      <h3>Huéspedes</h3>
+
+      <p>{{ totalHuespedes }}</p>
+
+    </div>
+
+    <!-- HABITACIONES -->
+    <div class="card">
+
+      <div class="card-icon">
+        🛏️
+      </div>
+
+      <h3>Habitaciones</h3>
+
+      <p>{{ totalHabitaciones }}</p>
+
+    </div>
+
+    <!-- PRODUCTOS -->
+    <div class="card">
+
+      <div class="card-icon">
+        📦
+      </div>
+
+      <h3>Productos</h3>
+
+      <p>{{ totalProductos }}</p>
+
+    </div>
+
+    <!-- LIBRES -->
+    <div class="card libre">
+
+      <div class="card-icon">
+        🟢
+      </div>
+
+      <h3>Habitaciones Libres</h3>
+
+      <p>{{ habitacionesLibres }}</p>
+
+    </div>
+
+    <!-- OCUPADAS -->
+    <div class="card ocupada">
+
+      <div class="card-icon">
+        🔴
+      </div>
+
+      <h3>Habitaciones Ocupadas</h3>
+
+      <p>{{ habitacionesOcupadas }}</p>
+
+    </div>
+
+  </div>
+
+</div>
