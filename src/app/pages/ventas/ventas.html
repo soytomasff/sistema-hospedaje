@@ -1,0 +1,99 @@
+<h2>Ventas de Productos</h2>
+
+<div class="card-venta">
+
+  <h3>Registrar venta de vitrina</h3>
+
+  <div class="form-venta">
+
+    <select [(ngModel)]="venta.producto.id" name="productoVenta">
+      <option [ngValue]="0">Seleccione producto</option>
+
+      @for (producto of productos; track producto.id) {
+        <option [ngValue]="producto.id">
+          {{ producto.nombre }} - Stock: {{ producto.stock }} - S/ {{ producto.precio }}
+        </option>
+      }
+    </select>
+
+    <input
+      type="number"
+      placeholder="Cantidad"
+      [(ngModel)]="venta.cantidad"
+      name="cantidad"
+    >
+
+    <select [(ngModel)]="venta.metodoPago" name="metodoPago">
+      <option value="EFECTIVO">Efectivo</option>
+      <option value="YAPE">Yape</option>
+      <option value="PLIN">Plin</option>
+      <option value="TARJETA">Tarjeta</option>
+      <option value="TRANSFERENCIA">Transferencia</option>
+    </select>
+
+    <input
+      type="text"
+      placeholder="Observación"
+      [(ngModel)]="venta.observacion"
+      name="observacion"
+    >
+
+    <button
+      type="button"
+      class="btn-venta"
+      (click)="registrarVenta()"
+    >
+      Registrar venta
+    </button>
+
+  </div>
+
+  <div class="resumen">
+    <p>Subtotal: <strong>S/ {{ calcularSubtotal() | number:'1.2-2' }}</strong></p>
+  </div>
+
+</div>
+
+<div class="tabla-ventas">
+
+  <h3>Historial de ventas</h3>
+
+  @if (ventas.length === 0) {
+
+    <p>No hay ventas registradas.</p>
+
+  } @else {
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Subtotal</th>
+          <th>Método pago</th>
+          <th>Fecha</th>
+          <th>Observación</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (venta of ventas; track venta.id) {
+          <tr>
+            <td>{{ venta.id }}</td>
+            <td>{{ venta.producto?.nombre }}</td>
+            <td>{{ venta.cantidad }}</td>
+            <td>S/ {{ venta.precioUnitario }}</td>
+            <td><strong>S/ {{ venta.subtotal }}</strong></td>
+            <td>{{ venta.metodoPago }}</td>
+            <td>{{ venta.fecha | date:'short' }}</td>
+            <td>{{ venta.observacion }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+  }
+
+</div>

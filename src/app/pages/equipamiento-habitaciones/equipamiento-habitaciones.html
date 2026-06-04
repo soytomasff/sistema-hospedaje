@@ -1,0 +1,203 @@
+<h2>Equipamiento de Habitaciones</h2>
+
+<div class="card">
+
+  <div class="header-card">
+    <div>
+      <h3>Control por habitación</h3>
+      <p>Administra TV, mesa, silla, cama, frazadas, baño, ducha caliente, ventilador y servicios.</p>
+    </div>
+
+    <div class="botones-header">
+      <button type="button" class="btn-nuevo" (click)="nuevo()">
+        + Agregar / Configurar
+      </button>
+
+      <button type="button" class="btn-actualizar" (click)="listar()">
+        Actualizar
+      </button>
+    </div>
+  </div>
+
+  @if (mostrarFormulario) {
+
+    <div class="form-card">
+
+      <h3>{{ editando ? 'Editar equipamiento' : 'Agregar equipamiento' }}</h3>
+
+      <div class="form-grid">
+
+        <select [(ngModel)]="form.habitacionId" name="habitacionId">
+          <option [ngValue]="0">Seleccione habitación</option>
+
+          @for (item of equipamientos; track item.habitacion_id) {
+            <option [ngValue]="item.habitacion_id">
+              Habitación {{ item.habitacion }} - {{ item.tipo }}
+            </option>
+          }
+        </select>
+
+        <input type="number" placeholder="TV" [(ngModel)]="form.tv" name="tv">
+        <input type="number" placeholder="Mesa" [(ngModel)]="form.mesa" name="mesa">
+        <input type="number" placeholder="Silla" [(ngModel)]="form.silla" name="silla">
+        <input type="number" placeholder="Cama" [(ngModel)]="form.cama" name="cama">
+        <input type="number" placeholder="Control remoto" [(ngModel)]="form.controlRemoto" name="controlRemoto">
+        <input type="number" placeholder="Frazada" [(ngModel)]="form.frazada" name="frazada">
+        <input type="number" placeholder="Sábana" [(ngModel)]="form.sabana" name="sabana">
+        <input type="number" placeholder="Toalla" [(ngModel)]="form.toalla" name="toalla">
+
+        <select [(ngModel)]="form.tipoBano" name="tipoBano">
+          <option value="PRIVADO">Baño privado</option>
+          <option value="COMPARTIDO">Baño compartido</option>
+        </select>
+
+        <label>
+          <input type="checkbox" [(ngModel)]="form.cable" name="cable">
+          Cable
+        </label>
+
+        <label>
+          <input type="checkbox" [(ngModel)]="form.wifi" name="wifi">
+          Wifi
+        </label>
+
+        <label>
+          <input type="checkbox" [(ngModel)]="form.duchaCaliente" name="duchaCaliente">
+          Ducha caliente
+        </label>
+
+        <label>
+          <input type="checkbox" [(ngModel)]="form.ventilador" name="ventilador">
+          Ventilador
+        </label>
+
+        <label>
+          <input type="checkbox" [(ngModel)]="form.tvSmart" name="tvSmart">
+          TV Smart
+        </label>
+
+        <label>
+          <input type="checkbox" [(ngModel)]="form.aireAcondicionado" name="aireAcondicionado">
+          Aire acondicionado
+        </label>
+
+        <input
+          class="observacion"
+          type="text"
+          placeholder="Observación"
+          [(ngModel)]="form.observacion"
+          name="observacion"
+        >
+
+      </div>
+
+      <div class="form-botones">
+        <button type="button" class="btn-guardar" (click)="guardar()">
+          {{ editando ? 'Actualizar' : 'Guardar' }}
+        </button>
+
+        <button type="button" class="btn-cancelar" (click)="cancelar()">
+          Cancelar
+        </button>
+      </div>
+
+    </div>
+
+  }
+
+  @if (cargando) {
+
+    <p class="cargando">Cargando equipamiento...</p>
+
+  } @else {
+
+    <div class="tabla-scroll">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Hab.</th>
+            <th>Tipo</th>
+            <th>TV</th>
+            <th>Mesa</th>
+            <th>Silla</th>
+            <th>Cama</th>
+            <th>Control</th>
+            <th>Frazada</th>
+            <th>Sábana</th>
+            <th>Toalla</th>
+            <th>Baño</th>
+            <th>Ducha</th>
+            <th>Vent.</th>
+            <th>Wifi</th>
+            <th>Cable</th>
+            <th>Obs.</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (item of equipamientos; track item.habitacion_id) {
+            <tr>
+              <td class="codigo">{{ item.habitacion }}</td>
+              <td>{{ item.tipo }}</td>
+              <td>{{ item.tv }}</td>
+              <td>{{ item.mesa }}</td>
+              <td>{{ item.silla }}</td>
+              <td>{{ item.cama }}</td>
+              <td>{{ item.control_remoto }}</td>
+              <td>{{ item.frazada }}</td>
+              <td>{{ item.sabana }}</td>
+              <td>{{ item.toalla }}</td>
+
+              <td>
+                <span
+                  class="bano"
+                  [class.bano-privado]="item.tipo_bano === 'PRIVADO'"
+                  [class.bano-compartido]="item.tipo_bano === 'COMPARTIDO'"
+                >
+                  {{ item.tipo_bano }}
+                </span>
+              </td>
+
+              <td>
+                <span [class.si]="item.ducha_caliente === 'SI'" [class.no]="item.ducha_caliente === 'NO'">
+                  {{ item.ducha_caliente }}
+                </span>
+              </td>
+
+              <td>
+                <span [class.si]="item.ventilador === 'SI'" [class.no]="item.ventilador === 'NO'">
+                  {{ item.ventilador }}
+                </span>
+              </td>
+
+              <td>
+                <span [class.si]="item.wifi === 'SI'" [class.no]="item.wifi === 'NO'">
+                  {{ item.wifi }}
+                </span>
+              </td>
+
+              <td>
+                <span [class.si]="item.cable === 'SI'" [class.no]="item.cable === 'NO'">
+                  {{ item.cable }}
+                </span>
+              </td>
+
+              <td class="obs">{{ item.observacion }}</td>
+
+              <td>
+                <button type="button" class="btn-editar" (click)="editar(item)">
+                  Editar
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+    </div>
+
+  }
+
+</div>

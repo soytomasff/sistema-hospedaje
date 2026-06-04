@@ -1,0 +1,113 @@
+<h2>Boleta de Hospedaje</h2>
+
+<div class="card-boleta">
+
+  <h3>Generar boleta del cuarto</h3>
+
+  <div class="form-boleta">
+
+    <select [(ngModel)]="boletaRequest.registroId" name="registroId">
+      <option [ngValue]="0">Seleccione registro</option>
+
+      @for (registro of registros; track registro.id) {
+        <option [ngValue]="registro.id">
+          Registro #{{ registro.id }} -
+          {{ registro.nombreHuesped }} -
+          Hab. {{ registro.numeroCuarto }} -
+          S/ {{ registro.precio || registro.precioCuarto }}
+        </option>
+      }
+    </select>
+
+    <select [(ngModel)]="boletaRequest.metodoPago" name="metodoPago">
+      <option value="EFECTIVO">Efectivo</option>
+      <option value="YAPE">Yape</option>
+      <option value="PLIN">Plin</option>
+      <option value="TARJETA">Tarjeta</option>
+      <option value="TRANSFERENCIA">Transferencia</option>
+    </select>
+
+    <button
+      type="button"
+      class="btn-generar"
+      (click)="generarBoleta()"
+    >
+      Generar boleta
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="tabla-boletas">
+
+  <div class="encabezado-tabla">
+    <div>
+      <h3>Historial de boletas</h3>
+      <p class="subtitulo-print">Boletas generadas para los huéspedes</p>
+    </div>
+  </div>
+
+  @if (boletas.length === 0) {
+
+    <p>No hay boletas registradas.</p>
+
+  } @else {
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Boleta</th>
+          <th>Huésped</th>
+          <th>DNI</th>
+          <th>Habitación</th>
+          <th>Ingreso</th>
+          <th>Salida</th>
+          <th>Noches</th>
+          <th>Precio noche</th>
+          <th>Total</th>
+          <th>Método pago</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (boleta of boletas; track boleta.id) {
+
+          <tr>
+            <td>{{ formatoBoleta(boleta) }}</td>
+            <td>{{ boleta.nombreHuesped }}</td>
+            <td>{{ boleta.dni }}</td>
+            <td>{{ boleta.numeroHabitacion }}</td>
+            <td>{{ boleta.fechaIngreso }}</td>
+            <td>{{ boleta.fechaSalida }}</td>
+            <td>{{ boleta.noches }}</td>
+            <td>S/ {{ boleta.precioNoche }}</td>
+            <td><strong>S/ {{ boleta.total }}</strong></td>
+            <td>{{ boleta.metodoPago }}</td>
+            <td>{{ boleta.estado }}</td>
+
+            <td>
+              <button
+                type="button"
+                class="btn-imprimir"
+                (click)="imprimirBoleta(boleta)"
+              >
+                Imprimir
+              </button>
+            </td>
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  }
+
+</div>

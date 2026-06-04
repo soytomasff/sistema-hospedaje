@@ -1,0 +1,214 @@
+<div class="caja-container">
+
+  <div class="header-caja">
+    <div>
+      <h2>Caja Diaria</h2>
+      <p>Control diario de hospedaje, ventas y egresos</p>
+    </div>
+
+    <div class="fecha-box">
+      <input
+        type="date"
+        [(ngModel)]="fechaSeleccionada"
+        (change)="cargarCaja()"
+      >
+
+      <button type="button" class="btn-buscar" (click)="cargarCaja()">
+        Consultar
+      </button>
+    </div>
+  </div>
+
+  @if (resumen.cerrado) {
+    <div class="alerta-cerrada">
+      Caja cerrada para la fecha {{ fechaSeleccionada }}
+    </div>
+  }
+
+  <div class="resumen-cards">
+
+    <div class="card-resumen hospedaje">
+      <span>Hospedaje</span>
+      <strong>S/ {{ moneda(resumen.totalHospedaje) }}</strong>
+    </div>
+
+    <div class="card-resumen vitrina">
+      <span>Ventas Vitrina</span>
+      <strong>S/ {{ moneda(resumen.totalVitrina) }}</strong>
+    </div>
+
+    <div class="card-resumen ingresos">
+      <span>Total Ingresos</span>
+      <strong>S/ {{ moneda(resumen.totalIngresos) }}</strong>
+    </div>
+
+    <div class="card-resumen egresos">
+      <span>Total Egresos</span>
+      <strong>S/ {{ moneda(resumen.totalEgresos) }}</strong>
+    </div>
+
+    <div class="card-resumen total">
+      <span>Total del Día</span>
+      <strong>S/ {{ moneda(resumen.totalDia) }}</strong>
+    </div>
+
+  </div>
+
+  <div class="grid-caja">
+
+    <div class="card-form">
+
+      <h3>Registrar egreso</h3>
+
+      <div class="form-egreso">
+
+        <input
+          type="text"
+          placeholder="Descripción del egreso"
+          [(ngModel)]="egreso.descripcion"
+          [disabled]="resumen.cerrado"
+        >
+
+        <select
+          [(ngModel)]="egreso.metodoPago"
+          [disabled]="resumen.cerrado"
+        >
+          <option value="EFECTIVO">Efectivo</option>
+          <option value="YAPE">Yape</option>
+          <option value="PLIN">Plin</option>
+          <option value="TARJETA">Tarjeta</option>
+          <option value="TRANSFERENCIA">Transferencia</option>
+        </select>
+
+        <input
+          type="number"
+          placeholder="Monto"
+          [(ngModel)]="egreso.monto"
+          [disabled]="resumen.cerrado"
+        >
+
+        <input
+          type="text"
+          placeholder="Observación"
+          [(ngModel)]="egreso.observacion"
+          [disabled]="resumen.cerrado"
+        >
+
+        <button
+          type="button"
+          class="btn-egreso"
+          (click)="registrarEgreso()"
+          [disabled]="resumen.cerrado"
+        >
+          Guardar egreso
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="card-metodos">
+
+      <h3>Totales por método de pago</h3>
+
+      @if (porMetodo.length === 0) {
+        <p class="sin-datos">No hay pagos registrados.</p>
+      } @else {
+        <table>
+          <thead>
+            <tr>
+              <th>Método</th>
+              <th>Ingresos</th>
+              <th>Egresos</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (item of porMetodo; track item.metodoPago) {
+              <tr>
+                <td>{{ item.metodoPago }}</td>
+                <td>S/ {{ moneda(item.ingresos) }}</td>
+                <td>S/ {{ moneda(item.egresos) }}</td>
+                <td><strong>S/ {{ moneda(item.total) }}</strong></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+
+    </div>
+
+  </div>
+
+  <div class="tabla-card">
+
+    <div class="tabla-header">
+      <div>
+        <h3>Movimientos del día</h3>
+        <p>Boletas, ventas de vitrina y egresos</p>
+      </div>
+
+      <div class="acciones">
+        <button
+          type="button"
+          class="btn-imprimir"
+          (click)="imprimirCierre()"
+        >
+          Imprimir cierre
+        </button>
+
+        <button
+          type="button"
+          class="btn-cerrar"
+          (click)="cerrarCaja()"
+          [disabled]="resumen.cerrado"
+        >
+          Cerrar caja
+        </button>
+      </div>
+    </div>
+
+    @if (movimientos.length === 0) {
+      <p class="sin-datos">No hay movimientos para esta fecha.</p>
+    } @else {
+      <table class="tabla-movimientos">
+        <thead>
+          <tr>
+            <th>Hora</th>
+            <th>Tipo</th>
+            <th>Habitación</th>
+            <th>Detalle</th>
+            <th>Método</th>
+            <th>Ingreso</th>
+            <th>Egreso</th>
+            <th>Observación</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (mov of movimientos; track mov.hora + mov.detalle) {
+            <tr>
+              <td>{{ mov.hora }}</td>
+
+              <td>
+                <span class="badge" [class.egreso]="mov.tipo === 'EGRESO'">
+                  {{ mov.tipo }}
+                </span>
+              </td>
+
+              <td>{{ mov.habitacion }}</td>
+              <td>{{ mov.detalle }}</td>
+              <td>{{ mov.metodoPago }}</td>
+              <td class="ingreso">S/ {{ moneda(mov.ingreso) }}</td>
+              <td class="egreso-text">S/ {{ moneda(mov.egreso) }}</td>
+              <td>{{ mov.observacion }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+
+  </div>
+
+</div> 

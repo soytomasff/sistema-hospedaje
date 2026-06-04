@@ -7,54 +7,96 @@ import { HuespedesComponent } from './pages/huespedes/huespedes';
 import { HabitacionesComponent } from './pages/habitaciones/habitaciones';
 import { RegistrosComponent } from './pages/registros/registros';
 import { ProductosComponent } from './pages/productos/productos';
+import { ReservasComponent } from './pages/reservas/reservas';
 
-// 🔥 GUARD
+import { Ventas } from './pages/ventas/ventas';
+import { BoletasComponent } from './pages/boletas/boletas';
+import { Movimientos } from './pages/movimientos/movimientos';
+import { StockUbicacion } from './pages/stock-ubicacion/stock-ubicacion';
+import { EquipamientoHabitaciones } from './pages/equipamiento-habitaciones/equipamiento-habitaciones';
+import { CajaDiaria } from './pages/caja-diaria/caja-diaria';
+
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
 
-  // LOGIN
   {
     path: '',
     component: LoginComponent
   },
 
-  // DASHBOARD
   {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [authGuard]
   },
 
-  // HUESPEDES
   {
     path: 'huespedes',
     component: HuespedesComponent,
     canActivate: [authGuard]
   },
 
-  // HABITACIONES
   {
     path: 'habitaciones',
     component: HabitacionesComponent,
     canActivate: [authGuard]
   },
 
-  // REGISTROS
+  {
+    path: 'equipamiento-habitaciones',
+    component: EquipamientoHabitaciones,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'reservas',
+    component: ReservasComponent,
+    canActivate: [authGuard]
+  },
+
   {
     path: 'registros',
     component: RegistrosComponent,
     canActivate: [authGuard]
   },
 
-  // PRODUCTOS
+  {
+    path: 'boletas',
+    component: BoletasComponent,
+    canActivate: [authGuard]
+  },
+
   {
     path: 'productos',
     component: ProductosComponent,
     canActivate: [authGuard]
   },
 
-  // RUTA NO ENCONTRADA
+  {
+    path: 'stock-ubicacion',
+    component: StockUbicacion,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'ventas',
+    component: Ventas,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'movimientos',
+    component: Movimientos,
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'caja-diaria',
+    component: CajaDiaria,
+    canActivate: [authGuard]
+  },
+
   {
     path: '**',
     redirectTo: ''

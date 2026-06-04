@@ -1,0 +1,108 @@
+.contenedor{
+  padding:20px;
+  min-height:100vh;
+  background:#f4f6f9;
+  font-family:Arial;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+h2{
+  font-size:35px;
+  color:#111827;
+}
+
+.btn-agregar{
+  background:#16a34a;
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.form-card,
+.tabla-card{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  margin-bottom:20px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+input,
+select{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+.form-actions{
+  margin-top:20px;
+  display:flex;
+  gap:10px;
+}
+
+.btn-guardar{
+  background:#2563eb;
+  color:white;
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
+}
+
+.btn-cancelar{
+  background:#ef4444;
+  color:white;
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th{
+  background:#111827;
+  color:white;
+}
+
+th,td{
+  padding:12px;
+  text-align:center;
+  border-bottom:1px solid #ddd;
+}
+
+.acciones{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+}
+
+.btn{
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  color:white;
+}
+
+.editar{
+  background:#3b82f6;
+}
+
+.eliminar{
+  background:#ef4444;
+}

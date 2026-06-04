@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { ProductoService } from '../../services/producto.service';
+import { MovimientoInventarioService } from '../../services/movimiento-inventario.service';
+
 import { Producto } from '../../models/producto';
 
 @Component({
@@ -14,6 +17,8 @@ import { Producto } from '../../models/producto';
 export class ProductosComponent implements OnInit {
 
   productos: Producto[] = [];
+  movimientos: any[] = [];
+
   cargando = true;
   editando = false;
 
@@ -30,10 +35,23 @@ export class ProductosComponent implements OnInit {
     ubicacion: ''
   };
 
-  constructor(private productoService: ProductoService) {}
+  movimiento = {
+    producto: {
+      id: 0
+    },
+    tipoMovimiento: 'ENTRADA',
+    cantidad: 1,
+    observacion: ''
+  };
+
+  constructor(
+    private productoService: ProductoService,
+    private movimientoService: MovimientoInventarioService
+  ) {}
 
   ngOnInit(): void {
     this.listarProductos();
+    this.listarMovimientos();
   }
 
   listarProductos(): void {
@@ -47,6 +65,17 @@ export class ProductosComponent implements OnInit {
       error: (err) => {
         console.error('Error al cargar productos:', err);
         this.cargando = false;
+      }
+    });
+  }
+
+  listarMovimientos(): void {
+    this.movimientoService.listar().subscribe({
+      next: (data) => {
+        this.movimientos = data;
+      },
+      error: (err) => {
+        console.error('Error al cargar movimientos:', err);
       }
     });
   }
@@ -75,6 +104,40 @@ export class ProductosComponent implements OnInit {
         }
       });
     }
+  }
+
+  registrarMovimiento(): void {
+    if (this.movimiento.producto.id === 0) {
+      alert('Seleccione un producto');
+      return;
+    }
+
+    if (this.movimiento.cantidad <= 0) {
+      alert('La cantidad debe ser mayor a 0');
+      return;
+    }
+
+    this.movimientoService.guardar(this.movimiento).subscribe({
+      next: () => {
+        alert('Movimiento registrado correctamente');
+
+        this.movimiento = {
+          producto: {
+            id: 0
+          },
+          tipoMovimiento: 'ENTRADA',
+          cantidad: 1,
+          observacion: ''
+        };
+
+        this.listarProductos();
+        this.listarMovimientos();
+      },
+      error: (err) => {
+        console.error('Error al registrar movimiento:', err);
+        alert(err.error?.message || 'Error al registrar movimiento');
+      }
+    });
   }
 
   editarProducto(producto: Producto): void {

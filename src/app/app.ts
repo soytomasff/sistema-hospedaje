@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
- standalone: true,
+  standalone: true,
   imports: [
     RouterOutlet,
     RouterLink,
@@ -13,26 +13,34 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
 
-  usuario = JSON.parse(localStorage.getItem('usuario') || 'null');
+  usuario: any = null;
 
   constructor(private router: Router) {}
 
-  cerrarSesion(): void {
+  ngOnInit(): void {
+    this.cargarUsuario();
 
-    localStorage.removeItem('usuario');
+    if (this.estaLogeado() && this.router.url === '/') {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
-    this.usuario = null;
-
-    this.router.navigate(['/']);
-
+  cargarUsuario(): void {
+    const data = localStorage.getItem('usuario');
+    this.usuario = data ? JSON.parse(data) : null;
   }
 
   estaLogeado(): boolean {
+    this.cargarUsuario();
+    return this.usuario !== null;
+  }
 
-    return this.usuario != null;
-
+  cerrarSesion(): void {
+    localStorage.removeItem('usuario');
+    this.usuario = null;
+    this.router.navigate(['/']);
   }
 
 }

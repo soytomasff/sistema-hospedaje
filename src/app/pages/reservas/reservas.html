@@ -1,0 +1,181 @@
+<div class="contenedor">
+
+  <!-- HEADER -->
+  <div class="header">
+
+    <h2>
+      📅 Reservas
+    </h2>
+
+    <button
+      class="btn-agregar"
+      (click)="agregar()"
+    >
+      +
+    </button>
+
+  </div>
+
+  <!-- FORMULARIO -->
+  @if (mostrarFormulario) {
+
+    <div class="form-card">
+
+      <h3>
+        {{ modoEdicion
+          ? 'Editar Reserva'
+          : 'Nueva Reserva'
+        }}
+      </h3>
+
+      <div class="form-grid">
+
+        <!-- HUESPED -->
+        <input
+          type="number"
+          [(ngModel)]="reservaForm.huesped.id"
+          placeholder="ID Huésped"
+        >
+
+        <!-- HABITACION -->
+        <input
+          type="number"
+          [(ngModel)]="reservaForm.habitacion.id"
+          placeholder="ID Habitación"
+        >
+
+        <!-- FECHA INGRESO -->
+        <input
+          type="date"
+          [(ngModel)]="reservaForm.fechaIngreso"
+        >
+
+        <!-- FECHA SALIDA -->
+        <input
+          type="date"
+          [(ngModel)]="reservaForm.fechaSalida"
+        >
+
+        <!-- ESTADO -->
+        <select
+          [(ngModel)]="reservaForm.estado"
+        >
+
+          <option value="RESERVADO">
+            RESERVADO
+          </option>
+
+          <option value="CONFIRMADO">
+            CONFIRMADO
+          </option>
+
+          <option value="CANCELADO">
+            CANCELADO
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- BOTONES -->
+      <div class="form-actions">
+
+        <button
+          class="btn-guardar"
+          (click)="guardar()"
+        >
+          Guardar
+        </button>
+
+        <button
+          class="btn-cancelar"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
+
+      </div>
+
+    </div>
+
+  }
+
+  <!-- TABLA -->
+  <div class="tabla-card">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>ID</th>
+
+          <th>Huésped</th>
+
+          <th>Habitación</th>
+
+          <th>Ingreso</th>
+
+          <th>Salida</th>
+
+          <th>Estado</th>
+
+          <th>Acciones</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        @for (r of reservas; track r.id) {
+
+          <tr>
+
+            <td>{{ r.id }}</td>
+
+            <td>{{ r.huesped?.id }}</td>
+
+            <td>{{ r.habitacion?.id }}</td>
+
+            <td>{{ r.fechaIngreso }}</td>
+
+            <td>{{ r.fechaSalida }}</td>
+
+            <td>
+              <span class="estado">
+                {{ r.estado }}
+              </span>
+            </td>
+
+            <!-- ACCIONES -->
+            <td class="acciones">
+
+              <button
+                class="btn editar"
+                (click)="editar(r)"
+              >
+                ✏️
+              </button>
+
+              <button
+                class="btn eliminar"
+                (click)="eliminar(r.id!)"
+              >
+                🗑️
+              </button>
+
+            </td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -11,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   usuario = {
     username: '',
@@ -19,8 +20,17 @@ export class LoginComponent {
   };
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
+
+  ngOnInit(): void {
+    const usuarioGuardado = localStorage.getItem('usuario');
+
+    if (usuarioGuardado) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   iniciarSesion(): void {
 
@@ -28,23 +38,16 @@ export class LoginComponent {
 
       next: (res) => {
 
-        // GUARDAR USUARIO
-        localStorage.setItem(
-          'usuario',
-          JSON.stringify(res)
-        );
+        localStorage.setItem('usuario', JSON.stringify(res));
 
         alert('Bienvenido');
 
-        // RECARGAR Y ENTRAR AL PANEL
-        window.location.href = '/dashboard';
+        this.router.navigate(['/dashboard']);
 
       },
 
       error: () => {
-
         alert('Usuario o contraseña incorrectos');
-
       }
 
     });

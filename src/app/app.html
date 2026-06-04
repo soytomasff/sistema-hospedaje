@@ -8,10 +8,8 @@
 
   <div class="layout">
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
 
-      <!-- PERFIL -->
       <div class="perfil">
 
         <div class="avatar">
@@ -24,64 +22,79 @@
 
       </div>
 
-      <hr>
-
-      <!-- MENÚ -->
       <nav class="menu">
 
         <a routerLink="/dashboard">
-
           <img src="/login.jpg" alt="">
           <span>Inicio</span>
-
         </a>
 
         <a routerLink="/huespedes">
-
           <img src="/loghue.jpg" alt="">
           <span>Huéspedes</span>
-
         </a>
 
         <a routerLink="/habitaciones">
-
           <img src="/loghabi.jpg" alt="">
           <span>Habitaciones</span>
+        </a>
 
+        <a routerLink="/equipamiento-habitaciones">
+          <img src="/logoequi.jpg" alt="">
+          <span>Equipamiento</span>
+        </a>
+
+        <a routerLink="/reservas">
+          <img src="/logregi.jpg" alt="">
+          <span>Reservas</span>
         </a>
 
         <a routerLink="/registros">
-
           <img src="/logregi.jpg" alt="">
           <span>Registros</span>
+        </a>
 
+        <a routerLink="/boletas">
+          <img src="/logobole.png" alt="">
+          <span>Boletas</span>
         </a>
 
         <a routerLink="/productos">
-
           <img src="/logpro.jpg" alt="">
           <span>Productos</span>
+        </a>
 
+        <a routerLink="/stock-ubicacion">
+          <img src="/logoinven.png" alt="">
+          <span>Inventario Áreas</span>
+        </a>
+
+        <a routerLink="/ventas">
+          <img src="/logoven.png" alt="">
+          <span>Ventas Vitrina</span>
+        </a>
+
+        <a routerLink="/movimientos">
+          <img src="/logomovi.png" alt="">
+          <span>Movimientos</span>
+        </a>
+
+        <a routerLink="/caja-diaria">
+          <img src="/logobole.png" alt="">
+          <span>Caja Diaria</span>
         </a>
 
       </nav>
 
-      <!-- BOTÓN -->
       <button class="salir" (click)="cerrarSesion()">
-
         <img src="/logcerrar.jpg" alt="">
-
         <span>Salir</span>
-
       </button>
 
     </aside>
 
-    <!-- CONTENIDO -->
     <main class="contenido">
-
       <router-outlet></router-outlet>
-
     </main>
 
   </div>

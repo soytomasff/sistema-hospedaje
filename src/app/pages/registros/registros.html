@@ -2,8 +2,59 @@
 
 <form (ngSubmit)="guardar()" class="formulario">
 
+  <!-- BUSCAR HUÉSPED POR DNI -->
+  <div class="bloque-busqueda">
+    <label>Buscar huésped por DNI</label>
+
+    <div class="grupo-dni">
+      <input
+        type="text"
+        [(ngModel)]="dniBusqueda"
+        name="dniBusqueda"
+        placeholder="Ingrese DNI"
+      >
+
+      <button
+        type="button"
+        class="btn-buscar-dni"
+        (click)="buscarHuespedPorDni()"
+      >
+        Buscar
+      </button>
+    </div>
+
+    @if (huespedEncontrado) {
+      <div class="huesped-encontrado">
+        <strong>Huésped encontrado:</strong>
+        {{ huespedEncontrado.nombre }} {{ huespedEncontrado.apellido }}
+        - DNI: {{ huespedEncontrado.dni }}
+        - {{ huespedEncontrado.procedencia }}
+      </div>
+    }
+
+    @if (dniNoEncontrado) {
+      <div class="huesped-no-encontrado">
+        <div>
+          <strong>Huésped no encontrado.</strong>
+          <span> Primero debe registrarlo en el módulo de Huéspedes.</span>
+        </div>
+
+        <button
+          type="button"
+          class="btn-ir-huesped"
+          (click)="irARegistrarHuesped()"
+        >
+          Registrar huésped
+        </button>
+      </div>
+    }
+
+  </div>
+
+  <!-- HUÉSPED -->
   <select [(ngModel)]="registro.huespedId" name="huespedId" required>
     <option [ngValue]="0">Seleccione huésped</option>
+
     @for (h of huespedes; track h.id) {
       <option [ngValue]="h.id">
         {{ h.nombre }} {{ h.apellido }} - DNI: {{ h.dni }}
@@ -11,6 +62,7 @@
     }
   </select>
 
+  <!-- HABITACIÓN -->
   <select
     [(ngModel)]="registro.habitacionId"
     name="habitacionId"
@@ -18,6 +70,7 @@
     required
   >
     <option [ngValue]="0">Seleccione habitación</option>
+
     @for (hab of habitaciones; track hab.id) {
       <option [ngValue]="hab.id">
         {{ hab.codigo }} - Hab. {{ hab.numero }} - {{ hab.tipo }}
@@ -25,13 +78,39 @@
     }
   </select>
 
-  <input type="number" [(ngModel)]="registro.precio" name="precio" placeholder="Precio" required>
+  <input
+    type="number"
+    [(ngModel)]="registro.precio"
+    name="precio"
+    placeholder="Precio"
+    required
+  >
 
-  <input type="date" [(ngModel)]="registro.fechaIngreso" name="fechaIngreso" required>
-  <input type="time" [(ngModel)]="registro.horaIngreso" name="horaIngreso" required>
+  <input
+    type="date"
+    [(ngModel)]="registro.fechaIngreso"
+    name="fechaIngreso"
+    required
+  >
 
-  <input type="date" [(ngModel)]="registro.fechaSalida" name="fechaSalida">
-  <input type="time" [(ngModel)]="registro.horaSalida" name="horaSalida">
+  <input
+    type="time"
+    [(ngModel)]="registro.horaIngreso"
+    name="horaIngreso"
+    required
+  >
+
+  <input
+    type="date"
+    [(ngModel)]="registro.fechaSalida"
+    name="fechaSalida"
+  >
+
+  <input
+    type="time"
+    [(ngModel)]="registro.horaSalida"
+    name="horaSalida"
+  >
 
   <button type="submit" class="btn-guardar">
     {{ editando ? 'Actualizar' : 'Guardar' }}
@@ -64,21 +143,36 @@
     @for (r of registros; track r.id) {
       <tr>
         <td>{{ r.id }}</td>
+
         <td>{{ obtenerNombreHuesped(r.huespedId) }}</td>
+
         <td>{{ obtenerHabitacion(r.habitacionId) }}</td>
+
         <td>S/ {{ r.precio }}</td>
+
         <td>{{ r.fechaIngreso }} {{ r.horaIngreso }}</td>
+
         <td>
           {{ r.fechaSalida || 'Pendiente' }}
           {{ r.horaSalida || '' }}
         </td>
 
         <td class="acciones">
-          <button class="btn editar" type="button" (click)="editar(r)" title="Editar">
+          <button
+            class="btn editar"
+            type="button"
+            (click)="editar(r)"
+            title="Editar"
+          >
             <i class="fas fa-pen"></i>
           </button>
 
-          <button class="btn eliminar" type="button" (click)="eliminar(r.id!)" title="Eliminar">
+          <button
+            class="btn eliminar"
+            type="button"
+            (click)="eliminar(r.id!)"
+            title="Eliminar"
+          >
             <i class="fas fa-trash"></i>
           </button>
         </td>

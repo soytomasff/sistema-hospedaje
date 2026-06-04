@@ -18,22 +18,54 @@
 
   </div>
 
+  <!-- BUSCAR POR DNI -->
+  <div class="buscar-dni-card">
+
+    <label>Buscar huésped por DNI</label>
+
+    <div class="grupo-dni">
+      <input
+        type="text"
+        [(ngModel)]="dniBusqueda"
+        name="dniBusqueda"
+        placeholder="Ingrese DNI"
+      >
+
+      <button
+        type="button"
+        class="btn-buscar-dni"
+        (click)="buscarPorDni()"
+      >
+        Buscar
+      </button>
+    </div>
+
+    @if (huespedEncontrado) {
+      <div class="mensaje-encontrado">
+        Huésped encontrado. Los datos se cargaron automáticamente.
+      </div>
+    }
+
+    @if (dniNoEncontrado) {
+      <div class="mensaje-no-encontrado">
+        Huésped no encontrado. Complete el formulario para registrarlo.
+      </div>
+    }
+
+  </div>
+
   <!-- FORMULARIO -->
   @if (mostrarFormulario) {
 
     <div class="form-card">
 
       <h3>
-
         <img src="/logregi.jpg" class="form-icono">
-
         {{ modoEdicion ? 'Editar huésped' : 'Nuevo huésped' }}
-
       </h3>
 
       <div class="form-grid">
 
-        <!-- NOMBRE -->
         <input
           type="text"
           [(ngModel)]="huespedForm.nombre"
@@ -41,7 +73,6 @@
           placeholder="Nombre"
         >
 
-        <!-- APELLIDO -->
         <input
           type="text"
           [(ngModel)]="huespedForm.apellido"
@@ -49,7 +80,6 @@
           placeholder="Apellido"
         >
 
-        <!-- DNI -->
         <input
           type="text"
           [(ngModel)]="huespedForm.dni"
@@ -57,7 +87,6 @@
           placeholder="DNI"
         >
 
-        <!-- PROCEDENCIA -->
         <input
           type="text"
           [(ngModel)]="huespedForm.procedencia"
@@ -65,7 +94,6 @@
           placeholder="Procedencia"
         >
 
-        <!-- PAÍS -->
         <input
           type="text"
           [(ngModel)]="huespedForm.pais"
@@ -73,7 +101,6 @@
           placeholder="País"
         >
 
-        <!-- PROFESIÓN -->
         <input
           type="text"
           [(ngModel)]="huespedForm.profesion"
@@ -81,7 +108,6 @@
           placeholder="Profesión"
         >
 
-        <!-- TELÉFONO -->
         <input
           type="text"
           [(ngModel)]="huespedForm.telefono"
@@ -91,7 +117,6 @@
 
       </div>
 
-      <!-- BOTONES -->
       <div class="form-actions">
 
         <button
@@ -110,6 +135,17 @@
           <i class="fas fa-times"></i>
         </button>
 
+        @if (modoEdicion || huespedForm.id) {
+          <button
+            class="btn-estancia"
+            type="button"
+            (click)="irARegistrarEstancia()"
+            title="Registrar estancia"
+          >
+            Registrar estancia
+          </button>
+        }
+
       </div>
 
     </div>
@@ -122,29 +158,17 @@
     <table>
 
       <thead>
-
         <tr>
-
           <th>ID</th>
-
           <th>Nombre</th>
-
           <th>Apellido</th>
-
           <th>DNI</th>
-
           <th>Procedencia</th>
-
           <th>País</th>
-
           <th>Profesión</th>
-
           <th>Teléfono</th>
-
           <th>Acciones</th>
-
         </tr>
-
       </thead>
 
       <tbody>
@@ -154,22 +178,14 @@
           <tr>
 
             <td>{{ h.id }}</td>
-
             <td>{{ h.nombre }}</td>
-
             <td>{{ h.apellido }}</td>
-
             <td>{{ h.dni }}</td>
-
             <td>{{ h.procedencia }}</td>
-
             <td>{{ h.pais }}</td>
-
             <td>{{ h.profesion }}</td>
-
             <td>{{ h.telefono }}</td>
 
-            <!-- BOTONES -->
             <td class="acciones">
 
               <button

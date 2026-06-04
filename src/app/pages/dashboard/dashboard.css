@@ -1,150 +1,197 @@
 .dashboard-container {
-
   min-height: 100vh;
-
   padding: 35px;
-
   font-family: Arial, sans-serif;
 
   background:
     linear-gradient(
-      rgba(0,0,0,0.45),
-      rgba(0,0,0,0.45)
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.45)
     ),
     url('/fondodash.jpg');
 
   background-size: cover;
-
   background-position: center;
-
   background-repeat: no-repeat;
-
   background-attachment: fixed;
 }
 
 /* HEADER */
 .dashboard-header {
-
   margin-bottom: 35px;
 }
 
 /* TITULO */
 .dashboard-header h2 {
-
   display: flex;
-
   align-items: center;
-
   gap: 15px;
 
   font-size: 42px;
-
   color: white;
+  margin: 0;
 
   text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
 }
 
-/* ICONO TITULO */
+/* ICONO DEL TITULO */
 .titulo-icono {
+  width: 62px;
+  height: 62px;
 
-  width: 55px;
-
-  height: 55px;
-
-  border-radius: 12px;
-
-  object-fit: cover;
+  border-radius: 14px;
+  object-fit: contain;
 
   background: white;
+  padding: 6px;
 
-  padding: 5px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
 /* SUBTITULO */
 .subtitulo {
-
   color: white;
-
   font-size: 18px;
-
-  margin-top: 10px;
+  margin-top: 12px;
+  margin-left: 78px;
 
   text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
 }
 
 /* CARDS */
 .cards {
-
   display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit, minmax(250px, 1fr));
-
+  grid-template-columns: repeat(5, 1fr);
   gap: 25px;
 }
 
 /* CARD */
 .card {
-
-  background: rgba(255,255,255,0.88);
-
+  background: rgba(255,255,255,0.92);
   backdrop-filter: blur(8px);
 
+  min-height: 250px;
   padding: 30px;
 
   border-radius: 22px;
-
   text-align: center;
 
   box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   transition: 0.3s;
 }
 
 /* HOVER */
 .card:hover {
-
   transform: translateY(-6px) scale(1.02);
-
   box-shadow: 0 15px 35px rgba(0,0,0,0.35);
 }
 
-/* ICONOS */
+/* CAJA DEL LOGO */
 .card-icon {
+  width: 95px;
+  height: 95px;
 
-  font-size: 55px;
+  margin-bottom: 18px;
 
-  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: white;
+  border-radius: 18px;
+  padding: 10px;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
-/* TITULOS */
-.card h3 {
+/* LOGO */
+.card-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
+/* TITULOS DE LAS CARDS */
+.card h3 {
+  margin: 0;
   margin-bottom: 15px;
 
   font-size: 24px;
-
   color: #111827;
+  font-weight: 800;
 }
 
 /* NUMEROS */
 .card p {
+  margin: 0;
 
   font-size: 42px;
-
   font-weight: bold;
 
   color: #2563eb;
 }
 
-/* LIBRES */
+/* HABITACIONES LIBRES */
 .libre p {
-
   color: #16a34a;
 }
 
-/* OCUPADAS */
+/* HABITACIONES OCUPADAS */
 .ocupada p {
-
   color: #dc2626;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1300px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard-container {
+    padding: 24px;
+  }
+
+  .dashboard-header h2 {
+    font-size: 30px;
+  }
+
+  .titulo-icono {
+    width: 50px;
+    height: 50px;
+  }
+
+  .subtitulo {
+    margin-left: 0;
+    font-size: 16px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-header h2 {
+    font-size: 24px;
+  }
+
+  .subtitulo {
+    font-size: 15px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
 }

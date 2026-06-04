@@ -5,7 +5,7 @@ h2 {
   font-weight: 700;
 }
 
-/* FORMULARIO */
+/* FORMULARIO PRODUCTOS */
 .formulario {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -17,7 +17,6 @@ h2 {
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-/* INPUTS */
 .formulario input {
   padding: 12px;
   border: 1px solid #cbd5e1;
@@ -70,7 +69,64 @@ h2 {
   background: #475569;
 }
 
-/* TABLA */
+/* CARD MOVIMIENTO */
+.card-movimiento {
+  background: #ffffff;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.card-movimiento h2 {
+  color: #1e3a8a;
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+
+/* FORMULARIO MOVIMIENTO */
+.form-movimiento {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+  gap: 14px;
+}
+
+.form-movimiento input,
+.form-movimiento select {
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: 0.2s;
+  background: white;
+}
+
+.form-movimiento input:focus,
+.form-movimiento select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px #dbeafe;
+}
+
+/* BOTON MOVIMIENTO */
+.btn-movimiento {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: white;
+  font-weight: 600;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-movimiento:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(22,163,74,0.3);
+}
+
+/* TABLAS GENERALES */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -81,47 +137,52 @@ table {
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-/* ENCABEZADO */
 th {
   background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: white;
   padding: 14px;
   text-align: left;
   font-size: 14px;
+  white-space: nowrap;
 }
 
-/* CELDAS */
 td {
   padding: 12px;
   border-bottom: 1px solid #e5e7eb;
   font-size: 14px;
+  vertical-align: middle;
 }
 
-/* HOVER */
 tr:hover {
   background: #f1f5f9;
+}
+
+/* TEXTO TOTAL */
+p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #475569;
 }
 
 /* ACCIONES */
 .acciones {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
 }
 
-/* BOTONES */
+/* BOTONES ACCIONES */
 .btn {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border: none;
   border-radius: 10px;
   color: white;
   cursor: pointer;
   transition: 0.2s;
-  font-size: 15px;
+  font-size: 14px;
 }
 
-/* EDITAR */
 .btn.editar {
   background: #3b82f6;
 }
@@ -131,7 +192,6 @@ tr:hover {
   transform: scale(1.05);
 }
 
-/* ELIMINAR */
 .btn.eliminar {
   background: #ef4444;
 }
@@ -141,9 +201,54 @@ tr:hover {
   transform: scale(1.05);
 }
 
-/* TEXTO */
-p {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #475569;
+/* HISTORIAL DE MOVIMIENTOS */
+.tabla-movimientos {
+  background: #ffffff;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.tabla-movimientos h2 {
+  color: #1e3a8a;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .formulario {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-movimiento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .btn-movimiento {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .formulario {
+    grid-template-columns: 1fr;
+  }
+
+  .form-movimiento {
+    grid-template-columns: 1fr;
+  }
+
+  table {
+    font-size: 12px;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th,
+  td {
+    padding: 10px;
+  }
 }

@@ -1,0 +1,131 @@
+<h2>Inventario por Áreas</h2>
+
+<div class="card">
+
+  <div class="header-card">
+    <div>
+      <h3>Stock por ubicación</h3>
+      <p>Control de frazadas, sábanas y artículos internos del hospedaje.</p>
+    </div>
+
+    <div class="botones-header">
+      <button type="button" class="btn-nuevo" (click)="nuevo()">
+        + Agregar nuevo
+      </button>
+
+      <button type="button" class="btn-actualizar" (click)="listarInventario()">
+        Actualizar
+      </button>
+    </div>
+  </div>
+
+  @if (mostrarFormulario) {
+
+    <div class="form-card">
+
+      <h3>{{ editando ? 'Editar stock por áreas' : 'Agregar stock por áreas' }}</h3>
+
+      <div class="form-grid">
+
+        <select [(ngModel)]="stockForm.productoId" name="productoId">
+          <option [ngValue]="0">Seleccione producto</option>
+
+          @for (producto of productos; track producto.id) {
+            <option [ngValue]="producto.id">
+              {{ producto.codigo }} - {{ producto.nombre }}
+            </option>
+          }
+        </select>
+
+        <input
+          type="number"
+          placeholder="Almacén principal"
+          [(ngModel)]="stockForm.almacenPrincipal"
+          name="almacenPrincipal"
+        >
+
+        <input
+          type="number"
+          placeholder="Administración"
+          [(ngModel)]="stockForm.administracion"
+          name="administracion"
+        >
+
+        <input
+          type="number"
+          placeholder="Habitaciones"
+          [(ngModel)]="stockForm.habitaciones"
+          name="habitaciones"
+        >
+
+        <input
+          type="number"
+          placeholder="Recepción"
+          [(ngModel)]="stockForm.recepcion"
+          name="recepcion"
+        >
+
+      </div>
+
+      <div class="form-botones">
+        <button type="button" class="btn-guardar" (click)="guardar()">
+          {{ editando ? 'Actualizar stock' : 'Guardar stock' }}
+        </button>
+
+        <button type="button" class="btn-cancelar" (click)="cancelar()">
+          Cancelar
+        </button>
+      </div>
+
+    </div>
+
+  }
+
+  @if (cargando) {
+
+    <p>Cargando inventario...</p>
+
+  } @else {
+
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Producto</th>
+          <th>Almacén principal</th>
+          <th>Administración</th>
+          <th>Habitaciones</th>
+          <th>Recepción</th>
+          <th>Total</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (item of inventario; track item.codigo) {
+
+          <tr>
+            <td class="codigo">{{ item.codigo }}</td>
+            <td>{{ item.producto }}</td>
+            <td>{{ item.almacen_principal }}</td>
+            <td>{{ item.administracion }}</td>
+            <td>{{ item.habitaciones }}</td>
+            <td>{{ item.recepcion }}</td>
+            <td class="total">{{ item.total }}</td>
+
+            <td>
+              <button type="button" class="btn-editar" (click)="editar(item)">
+                Editar
+              </button>
+            </td>
+          </tr>
+
+        }
+
+      </tbody>
+    </table>
+
+  }
+
+</div>

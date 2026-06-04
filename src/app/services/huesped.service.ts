@@ -32,6 +32,11 @@ export class HuespedService {
     return this.http.get<Huesped[]>(this.apiUrl);
   }
 
+  // BUSCAR POR DNI
+  buscarPorDni(dni: string): Observable<Huesped> {
+    return this.http.get<Huesped>(`${this.apiUrl}/dni/${dni}`);
+  }
+
   // AGREGAR
   crear(huesped: Huesped): Observable<Huesped> {
     return this.http.post<Huesped>(this.apiUrl, huesped);

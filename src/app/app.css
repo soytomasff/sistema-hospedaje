@@ -1,218 +1,229 @@
 :host {
   display: block;
-  min-height: 100vh;
+  height: 100vh;
   font-family: Arial, sans-serif;
 }
 
 /* LAYOUT */
 .layout {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   background: #f3f6fb;
+  overflow: hidden;
 }
 
-/* SIDEBAR */
+/* SIDEBAR FIJO */
 .sidebar {
-
   width: 280px;
+  min-width: 280px;
+  height: 100vh;
 
   background:
-    linear-gradient(rgba(5, 10, 25, 0.92),
-    rgba(5, 10, 25, 0.95)),
+    linear-gradient(
+      rgba(5, 10, 25, 0.92),
+      rgba(5, 10, 25, 0.95)
+    ),
     url('/hsp.jpg');
 
   background-size: cover;
   background-position: center;
 
   color: white;
-
-  padding: 25px 18px;
+  padding: 18px 16px;
 
   display: flex;
   flex-direction: column;
 
-  box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
+
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 /* PERFIL */
 .perfil {
-
   text-align: center;
-
-  margin-bottom: 30px;
-
-  padding-bottom: 20px;
-
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  margin-bottom: 18px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* FOTO */
 .avatar {
-
-  width: 110px;
-  height: 110px;
-
+  width: 90px;
+  height: 90px;
   margin: auto;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 
   border-radius: 50%;
-
   overflow: hidden;
 
-  border: 4px solid #2563eb;
+  border: 3px solid #2563eb;
+  background: white;
 
-  box-shadow: 0 0 20px rgba(37,99,235,0.5);
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
 }
 
 .avatar img {
-
   width: 100%;
   height: 100%;
-
   object-fit: cover;
 }
 
-/* TEXTO PERFIL */
 .perfil span {
-
   display: block;
-
-  font-size: 13px;
-
+  font-size: 12px;
   color: #cbd5e1;
-
-  margin-top: 8px;
-
+  margin-top: 6px;
   text-transform: uppercase;
 }
 
 .perfil strong {
-
   display: block;
-
   margin-top: 5px;
-
-  font-size: 28px;
-
+  font-size: 22px;
   color: white;
 }
 
 /* MENÚ */
 .menu {
-
   display: flex;
-
   flex-direction: column;
-
-  gap: 15px;
-
-  margin-top: 20px;
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .menu a {
-
   display: flex;
-
   align-items: center;
+  gap: 12px;
 
-  gap: 15px;
+  padding: 12px 14px;
 
-  padding: 16px;
-
-  border-radius: 14px;
+  border-radius: 12px;
 
   text-decoration: none;
-
   color: white;
 
-  font-size: 22px;
-
+  font-size: 18px;
   font-weight: bold;
 
-  background: rgba(255,255,255,0.08);
-
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(4px);
 
   transition: 0.3s;
 }
 
-/* LOGOS MENÚ */
-.menu a img {
+.menu a span {
+  display: inline-block;
+  color: white;
+}
 
-  width: 32px;
-  height: 32px;
+/* LOGOS DEL MENÚ */
+.menu a img {
+  width: 34px;
+  height: 34px;
 
   border-radius: 8px;
 
-  object-fit: cover;
+  object-fit: contain;
+  background: white;
+  padding: 4px;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
 }
 
-/* HOVER */
 .menu a:hover {
-
   background: #2563eb;
-
   transform: translateX(6px) scale(1.02);
-
-  box-shadow: 0 0 15px rgba(37,99,235,0.5);
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
 }
 
 /* BOTÓN SALIR */
 .salir {
-
-  margin-top: auto;
-
+  margin-top: 18px;
   background: #ef4444;
 
   border: none;
+  padding: 12px;
 
-  padding: 16px;
-
-  border-radius: 14px;
+  border-radius: 12px;
 
   color: white;
 
-  font-size: 22px;
-
+  font-size: 18px;
   font-weight: bold;
 
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
   gap: 12px;
 
   cursor: pointer;
-
   transition: 0.3s;
 }
 
-/* LOGO SALIR */
 .salir img {
+  width: 34px;
+  height: 34px;
 
-  width: 30px;
-  height: 30px;
+  border-radius: 8px;
 
-  border-radius: 6px;
+  object-fit: contain;
+  background: white;
+  padding: 4px;
+}
+
+.salir span {
+  color: white;
 }
 
 .salir:hover {
-
   background: #dc2626;
-
   transform: scale(1.03);
 }
 
-/* CONTENIDO */
+/* CONTENIDO CON SCROLL PROPIO */
 .contenido {
-
   flex: 1;
-
+  height: 100vh;
   padding: 35px;
-
+  overflow-y: auto;
   overflow-x: auto;
-
   background: #f1f5f9;
+  box-sizing: border-box;
+}
+
+/* SCROLL SIDEBAR */
+.sidebar::-webkit-scrollbar {
+  width: 7px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+    height: auto;
+    overflow: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+  }
+
+  .contenido {
+    height: auto;
+    padding: 20px;
+  }
 }

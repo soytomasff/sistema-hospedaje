@@ -76,6 +76,58 @@
 
 </form>
 
+
+<!-- ENTRADA Y SALIDA DE PRODUCTOS -->
+<div class="card-movimiento">
+
+  <h2>Entrada y salida de productos</h2>
+
+  <div class="form-movimiento">
+
+    <select [(ngModel)]="movimiento.producto.id" name="productoMovimiento">
+      <option [ngValue]="0">Seleccione producto</option>
+
+      @for (producto of productos; track producto.id) {
+        <option [ngValue]="producto.id">
+          {{ producto.nombre }} - Stock: {{ producto.stock }}
+        </option>
+      }
+    </select>
+
+    <select [(ngModel)]="movimiento.tipoMovimiento" name="tipoMovimiento">
+      <option value="ENTRADA">Entrada</option>
+      <option value="SALIDA">Salida</option>
+      <option value="DANADO">Dañado</option>
+      <option value="EXTRAVIADO">Extraviado</option>
+    </select>
+
+    <input
+      type="number"
+      placeholder="Cantidad"
+      [(ngModel)]="movimiento.cantidad"
+      name="cantidadMovimiento"
+    >
+
+    <input
+      type="text"
+      placeholder="Observación"
+      [(ngModel)]="movimiento.observacion"
+      name="observacionMovimiento"
+    >
+
+    <button
+      type="button"
+      class="btn-movimiento"
+      (click)="registrarMovimiento()"
+    >
+      Registrar movimiento
+    </button>
+
+  </div>
+
+</div>
+
+
 @if (cargando) {
 
   <p>Cargando productos...</p>
@@ -146,3 +198,55 @@
   </table>
 
 }
+
+
+<!-- HISTORIAL DE MOVIMIENTOS -->
+<div class="tabla-movimientos">
+
+  <h2>Historial de movimientos</h2>
+
+  @if (movimientos.length === 0) {
+
+    <p>No hay movimientos registrados.</p>
+
+  } @else {
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Producto</th>
+          <th>Tipo</th>
+          <th>Cantidad</th>
+          <th>Observación</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (mov of movimientos; track mov.id) {
+
+          <tr>
+            <td>{{ mov.id }}</td>
+            <td>{{ mov.producto?.nombre }}</td>
+
+            <td>
+              {{ mov.tipoMovimiento === 'DANADO' ? 'DAÑADO' : mov.tipoMovimiento }}
+            </td>
+
+            <td>{{ mov.cantidad }}</td>
+            <td>{{ mov.observacion }}</td>
+            <td>{{ mov.fecha | date:'short' }}</td>
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  }
+
+</div>
